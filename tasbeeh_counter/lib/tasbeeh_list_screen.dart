@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TasbeehScreen extends StatefulWidget {
   @override
@@ -79,6 +80,23 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
     );
   }
 
+  // Function to show the undo Tasbih dialog
+  void _showUndoTasbihDialog(Map<String, dynamic> deletedItem, int index) {
+    final snackBar = SnackBar(
+      content: Text('Tasbeeh Deleted!'),
+      action: SnackBarAction(
+        label: 'Undo',
+        onPressed: () {
+          // Undo the delete
+          setState(() {
+            tasbeehItems.insert(index, deletedItem);
+          });
+        },
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,30 +123,43 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
           ),
         ),
         padding: EdgeInsets.all(40),
-        child: ListView(
-          children: tasbeehItems.map((item) {
-            int totalCount = (item['total_set'] * 100) + item['current_count'];
-            return Card(
-              color: Colors.grey[700],
-              margin: EdgeInsets.only(bottom: 30),
-              child: ListTile(
-                title: Text(
-                  '${item['tasbih_name']}',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
-                trailing: Text(
-                  'Count: ${item['current_count']}/${item['total_set']} (${item['set_completed']})\nTotal: $totalCount',
-                  style: TextStyle(fontSize: 15, color: Colors.white),
+        child: ListView.builder(
+          itemCount: tasbeehItems.length,
+          itemBuilder: (context, index) {
+            final item = tasbeehItems[index];
+            return Dismissible(
+              key: Key(item['tasbih_name']),
+              onDismissed: (direction) {
+                // Keep a reference to the deleted item
+                Map<String, dynamic> deletedItem = tasbeehItems[index];
+                // Remove the item from the data source
+                setState(() {
+                  tasbeehItems.removeAt(index);
+                });
+                // Show the undo dialog
+                _showUndoTasbihDialog(deletedItem, index);
+              },
+              child: Card(
+                color: Colors.grey[700],
+                margin: EdgeInsets.only(bottom: 30),
+                child: ListTile(
+                  title: Text(
+                    '${item['tasbih_name']}',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                  trailing: Text(
+                    'Count: ${item['current_count']}/${item['total_set']} (${item['set_completed']})\nTotal: ${item['total_set'] * 100 + item['current_count']}',
+                    style: TextStyle(fontSize: 15, color: Colors.white),
+                  ),
                 ),
               ),
             );
-          }).toList(),
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddTasbihDialog,
         child: Icon(Icons.add),
-        backgroundColor: Colors.black,
       ),
     );
   }

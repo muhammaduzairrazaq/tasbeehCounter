@@ -39,7 +39,7 @@ class _MyScreenState extends State<MyScreen> {
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text(tasbeehName, style: TextStyle(color: Colors.white)),
+        title: Text('Tasbeeh Counter', style: TextStyle(color: Colors.white)),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.restart_alt, color: Colors.white),
