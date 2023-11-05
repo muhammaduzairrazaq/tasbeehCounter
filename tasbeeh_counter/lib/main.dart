@@ -6,6 +6,6 @@ import 'tasbeeh_counter_screen.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: TasbeehCounter(),
+    home: MyScreen(),
   ));
 }
