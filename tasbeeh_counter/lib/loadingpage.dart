@@ -1,42 +1,6 @@
-// import 'package:flutter/material.dart';
-
-// class LoadingScreen extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//    return Scaffold(
-//   body: Center(
-//     child: Column(
-//       mainAxisAlignment: MainAxisAlignment.center,
-//       children: [
-//         Image.asset(
-//           'assets/lodingbk.gif',
-//           fit: BoxFit.cover,
-//           width: 200,
-//           height: 200,
-//         ),
-//         SizedBox(height: 20), 
-//         Text(
-//           'Tasbeeh Counter',
-//           style: TextStyle(
-//             fontSize: 25,
-//             color: Colors.black,
-//             fontWeight: FontWeight.bold,
-//           ),
-//         ),
-//       ],
-//     ),
-//   ),
-// );
-
-
-
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'tasbeeh_list_screen.dart';
 import 'dart:async';
-
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -44,7 +8,6 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -68,7 +31,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
               width: 200,
               height: 200,
             ),
-            SizedBox(height: 20), 
+            SizedBox(height: 20),
             Text(
               'Tasbeeh Counter',
               style: TextStyle(
@@ -83,5 +46,3 @@ class _LoadingScreenState extends State<LoadingScreen> {
     );
   }
 }
-
-

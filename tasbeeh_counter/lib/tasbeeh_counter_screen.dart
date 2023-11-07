@@ -1,25 +1,38 @@
 import 'package:flutter/material.dart';
+import 'settingscreen.dart';
 
-class MyScreen extends StatefulWidget {
+class TasbeehCounter extends StatefulWidget {
   @override
-  _MyScreenState createState() => _MyScreenState();
+  _TasbeehCounterState createState() => _TasbeehCounterState();
+  final Map<String, dynamic> item;
+  final int index;
+  TasbeehCounter({required this.item, required this.index});
 }
 
-class _MyScreenState extends State<MyScreen> {
+class _TasbeehCounterState extends State<TasbeehCounter> {
   String tasbeehName = 'Tasbeeh Name';
   int setCompleted = 0;
-  int cumulative = 0;
-  double progress = 0;
+  int totalCount = 0;
+  int progress = 0;
+  int totalSet = 0;
+  int currentCount = 0;
 
   void incrementProgress() {
     setState(() {
-      if (progress < 100) {
+      if (progress <= totalSet - 1) {
         progress++;
-        cumulative++;
+        totalCount++;
+      } else if (progress == totalSet) {
+        progress = 1;
+        totalCount++;
+      }
+    });
+  }
 
-      } else {
-        progress = 0;
-        setCompleted ++;
+  void incrementsetProgress() {
+    setState(() {
+      if (progress == totalSet) {
+        setCompleted++;
       }
     });
   }
@@ -27,7 +40,31 @@ class _MyScreenState extends State<MyScreen> {
   void restartProgress() {
     setState(() {
       progress = 0;
+      totalCount = 0;
+      setCompleted = 0;
+      currentCount = 0;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.item.containsKey('tasbih_name')) {
+      tasbeehName = widget.item['tasbih_name'];
+    }
+    if (widget.item.containsKey('set_completed')) {
+      setCompleted = widget.item['set_completed'];
+    }
+    if (widget.item.containsKey('total_count')) {
+      totalCount = widget.item['total_count'];
+    }
+    if (widget.item.containsKey('total_set')) {
+      totalSet = widget.item['total_set'];
+    }
+    if (widget.item.containsKey('current_count')) {
+      currentCount = widget.item['current_count'];
+      progress = currentCount;
+    }
   }
 
   @override
@@ -37,7 +74,18 @@ class _MyScreenState extends State<MyScreen> {
         backgroundColor: Colors.black,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            Navigator.of(context).pop({
+              'item': widget.item,
+              'updatedItem': {
+                'tasbih_name': widget.item['tasbih_name'],
+                'total_set': widget.item['total_set'],
+                'current_count': progress,
+                'total_count': totalCount,
+                'set_completed': setCompleted,
+              },
+            });
+          },
         ),
         title: Text('Tasbeeh Counter', style: TextStyle(color: Colors.white)),
         actions: <Widget>[
@@ -48,7 +96,11 @@ class _MyScreenState extends State<MyScreen> {
           IconButton(
             icon: Icon(Icons.settings, color: Colors.white),
             onPressed: () {
-              // Put your settings function here
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => Settings(),
+                ),
+              );
             },
           ),
         ],
@@ -71,7 +123,7 @@ class _MyScreenState extends State<MyScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  tasbeehName,
+                  '$tasbeehName',
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -80,7 +132,10 @@ class _MyScreenState extends State<MyScreen> {
                 ),
                 SizedBox(height: 50.0),
                 GestureDetector(
-                  onTap: incrementProgress,
+                  onTap: () {
+                    incrementProgress();
+                    incrementsetProgress();
+                  },
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -89,7 +144,8 @@ class _MyScreenState extends State<MyScreen> {
                         width: 200,
                         child: CircularProgressIndicator(
                           value: progress / 100,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.black),
                           strokeWidth: 10,
                           backgroundColor: Color.fromARGB(255, 158, 158, 158),
                         ),
@@ -104,17 +160,21 @@ class _MyScreenState extends State<MyScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20.0,),
+                SizedBox(
+                  height: 20.0,
+                ),
                 Text(
                   'Set Completed: $setCompleted',
-                  style: TextStyle(fontSize: 20,
-                  color: Color.fromARGB(255, 158, 158, 158),
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 158, 158, 158),
                   ),
                 ),
                 Text(
-                  'Cumulative: $cumulative',
-                  style: TextStyle(fontSize: 20,
-                  color: Color.fromARGB(255, 158, 158, 158),
+                  'Cumulative: $totalCount',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 158, 158, 158),
                   ),
                 ),
               ],
