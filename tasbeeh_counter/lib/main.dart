@@ -7,9 +7,9 @@ void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     // home: MyScreen(),
-    // home: LoadingScreen(),
+    home: LoadingScreen(),
     // home: TasbeehScreen(),
    
-     home: Settings(),
+    //  home: Settings(),
   ));
 }
