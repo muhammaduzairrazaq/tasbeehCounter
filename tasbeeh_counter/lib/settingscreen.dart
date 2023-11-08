@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'app_theme.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -9,16 +10,23 @@ class _SettingsState extends State<Settings> {
   bool _vibration = false;
   bool _sound = false;
   bool _vignette = false;
-  MaterialColor _themeColor = Colors.blue;
-  Color _textcolor = Colors.blue;
   int _currentImageIndex = 0;
 
-  List<MaterialColor> themeColors = [
+  List<Color> themeColors = [
     Colors.red,
     Colors.blue,
     Colors.orange,
-    Colors.green
+    Colors.green,
+    Colors.black,
+    Colors.pink,
+    Colors.tealAccent,
   ];
+
+  void updateThemeColor(Color color) async {
+    setState(() {
+      AppTheme.updateThemeColor(color);
+    });
+  }
 
   List<String> imagePaths = [
     'assets/tbk1.png',
@@ -26,34 +34,14 @@ class _SettingsState extends State<Settings> {
     'assets/tbk3.png',
   ];
 
-  void updateThemeColor(MaterialColor color) {
-    setState(() {
-      _themeColor = color;
-
-      if (color == Colors.red) {
-        _textcolor = Colors.red;
-      }
-
-      if (color == Colors.blue) {
-        _textcolor = Colors.blue;
-      }
-
-      if (color == Colors.orange) {
-        _textcolor = Colors.orange;
-      }
-
-      if (color == Colors.green) {
-        _textcolor = Colors.green;
-      }
-    });
-  }
-
   void nextImage() {
     setState(() {
       if (_currentImageIndex < imagePaths.length - 1) {
         _currentImageIndex++;
+        BackgroundImage.updateBackgroundImage(imagePaths[_currentImageIndex]);
       } else {
         _currentImageIndex = 0;
+        BackgroundImage.updateBackgroundImage(imagePaths[_currentImageIndex]);
       }
     });
   }
@@ -62,39 +50,37 @@ class _SettingsState extends State<Settings> {
     setState(() {
       if (_currentImageIndex > 0) {
         _currentImageIndex--;
+        BackgroundImage.updateBackgroundImage(imagePaths[_currentImageIndex]);
       } else {
         _currentImageIndex = imagePaths.length - 1;
+        BackgroundImage.updateBackgroundImage(imagePaths[_currentImageIndex]);
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    ThemeData customTheme = ThemeData(
-      primarySwatch: _themeColor,
-      textTheme: TextTheme(
-        headline6: TextStyle(color: _themeColor),
-      ),
-    );
-
     return MaterialApp(
-      theme: customTheme,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: AppTheme.textcolor,
           title: Text(
             'Tasbeeh Counter',
             style: TextStyle(color: Colors.white),
           ),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
             onPressed: () {
-              Navigator.pop(context); // Navigate back to the previous screen
+              Navigator.pop(context);
             },
           ),
         ),
         body: Stack(
-          children: <Widget>[
+          children: [
             Image.asset(
               imagePaths[_currentImageIndex],
               fit: BoxFit.cover,
@@ -102,13 +88,12 @@ class _SettingsState extends State<Settings> {
               height: double.infinity,
             ),
             Container(
-              color: const Color.fromARGB(255, 87, 87, 87)
-                  .withOpacity(0.8), // Transparent overlay
+              color: const Color.fromARGB(255, 87, 87, 87).withOpacity(0.8),
               width: double.infinity,
               height: double.infinity,
             ),
             ListView(
-              children: <Widget>[
+              children: [
                 Container(
                   decoration: BoxDecoration(
                     border: Border(
@@ -117,7 +102,7 @@ class _SettingsState extends State<Settings> {
                   child: SwitchListTile(
                     title: Text(
                       'Vibration',
-                      style: TextStyle(color: _textcolor, fontSize: 18),
+                      style: TextStyle(color: AppTheme.textcolor, fontSize: 18),
                     ),
                     value: _vibration,
                     onChanged: (bool value) {
@@ -135,7 +120,7 @@ class _SettingsState extends State<Settings> {
                   child: SwitchListTile(
                     title: Text(
                       'Sound',
-                      style: TextStyle(color: _textcolor, fontSize: 18),
+                      style: TextStyle(color: AppTheme.textcolor, fontSize: 18),
                     ),
                     value: _sound,
                     onChanged: (bool value) {
@@ -153,7 +138,7 @@ class _SettingsState extends State<Settings> {
                   child: ListTile(
                     title: Text(
                       'Theme',
-                      style: TextStyle(color: _textcolor, fontSize: 18),
+                      style: TextStyle(color: AppTheme.textcolor, fontSize: 18),
                     ),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -172,7 +157,7 @@ class _SettingsState extends State<Settings> {
                   ),
                 ),
                 SizedBox(
-                  height: 48.0, // Adjust the height as needed
+                  height: 48.0,
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border(
@@ -180,23 +165,25 @@ class _SettingsState extends State<Settings> {
                       ),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 12.0), // Adjust the value as needed
+                      padding: EdgeInsets.symmetric(horizontal: 12.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
+                        children: [
                           IconButton(
-                            icon: Icon(Icons.arrow_back, color: _textcolor),
+                            icon: Icon(Icons.arrow_back,
+                                color: AppTheme.textcolor),
                             onPressed: () {
                               previousImage();
                             },
                           ),
                           Text(
                             'Image Background',
-                            style: TextStyle(color: _themeColor, fontSize: 20),
+                            style: TextStyle(
+                                color: AppTheme.textcolor, fontSize: 20),
                           ),
                           IconButton(
-                            icon: Icon(Icons.arrow_forward, color: _textcolor),
+                            icon: Icon(Icons.arrow_forward,
+                                color: AppTheme.textcolor),
                             onPressed: () {
                               nextImage();
                             },
@@ -215,7 +202,7 @@ class _SettingsState extends State<Settings> {
                   child: SwitchListTile(
                     title: Text(
                       'Vignette',
-                      style: TextStyle(color: _textcolor, fontSize: 18),
+                      style: TextStyle(color: AppTheme.textcolor, fontSize: 18),
                     ),
                     value: _vignette,
                     onChanged: (bool value) {
@@ -236,13 +223,12 @@ class _SettingsState extends State<Settings> {
                           _vibration = false;
                           _sound = false;
                           _vignette = false;
-                          _themeColor = Colors.blue;
-                          _textcolor = Colors.blue;
+                          AppTheme.textcolor = Colors.green;
                         });
                       },
                       style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(_themeColor),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            AppTheme.textcolor),
                       ),
                       child: Padding(
                         padding: EdgeInsets.all(8),

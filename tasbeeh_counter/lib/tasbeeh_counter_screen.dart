@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'settingscreen.dart';
+import 'app_theme.dart';
 
 class TasbeehCounter extends StatefulWidget {
   @override
@@ -71,7 +72,7 @@ class _TasbeehCounterState extends State<TasbeehCounter> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: AppTheme.textcolor,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
@@ -106,11 +107,11 @@ class _TasbeehCounterState extends State<TasbeehCounter> {
         ],
       ),
       body: Stack(
-        children: <Widget>[
+        children: [
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/tbk3.png'),
+                image: AssetImage(BackgroundImage.imagepath),
                 fit: BoxFit.cover,
               ),
             ),
@@ -121,7 +122,7 @@ class _TasbeehCounterState extends State<TasbeehCounter> {
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
+              children: [
                 Text(
                   '$tasbeehName',
                   style: TextStyle(
@@ -145,7 +146,7 @@ class _TasbeehCounterState extends State<TasbeehCounter> {
                         child: CircularProgressIndicator(
                           value: progress / 100,
                           valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.black),
+                              AlwaysStoppedAnimation<Color>(AppTheme.textcolor),
                           strokeWidth: 10,
                           backgroundColor: Color.fromARGB(255, 158, 158, 158),
                         ),

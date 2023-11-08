@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasbeeh_counter/settingscreen.dart';
 import 'tasbeeh_counter_screen.dart';
+import 'app_theme.dart';
 
 class TasbeehScreen extends StatefulWidget {
   @override
@@ -38,7 +39,42 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
       'set_completed': 0,
     },
     {
+      'tasbih_name': 'Subhaan Allah',
+      'total_set': 33,
+      'current_count': 0,
+      'total_count': 0,
+      'set_completed': 0,
+    },
+     {
       'tasbih_name': 'AstaghfirAllah',
+      'total_set': 33,
+      'current_count': 0,
+      'total_count': 0,
+      'set_completed': 0,
+    },
+     {
+      'tasbih_name': 'La illaha illallah',
+      'total_set': 33,
+      'current_count': 0,
+      'total_count': 0,
+      'set_completed': 0,
+    },
+     {
+      'tasbih_name': 'AstaghfirAllah',
+      'total_set': 33,
+      'current_count': 0,
+      'total_count': 0,
+      'set_completed': 0,
+    },
+     {
+      'tasbih_name': 'Allahumma',
+      'total_set': 33,
+      'current_count': 0,
+      'total_count': 0,
+      'set_completed': 0,
+    },
+     {
+      'tasbih_name': 'Ayate Karima',
       'total_set': 33,
       'current_count': 0,
       'total_count': 0,
@@ -56,18 +92,21 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Add New Tasbih'),
+          title: Text(
+            'Add New Tasbeeh',
+            style: TextStyle(color: AppTheme.textcolor),
+          ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
+            children: [
               TextField(
-                decoration: InputDecoration(hintText: 'Enter Tasbih Name'),
+                decoration: InputDecoration(hintText: 'Enter Tasbeeh Name'),
                 onChanged: (value) {
                   tasbihName = value;
                 },
               ),
               TextField(
-                decoration: InputDecoration(hintText: 'Enter Tasbih Set'),
+                decoration: InputDecoration(hintText: 'Enter Tasbeeh Set'),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   tasbihSet = int.tryParse(value) ?? 0;
@@ -80,7 +119,10 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancel'),
+              child: Text(
+                'Cancel',
+                style: TextStyle(color: AppTheme.textcolor),
+              ),
             ),
             TextButton(
               onPressed: () {
@@ -95,7 +137,10 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
                 });
                 Navigator.of(context).pop();
               },
-              child: Text('Save'),
+              child: Text(
+                'Save',
+                style: TextStyle(color: AppTheme.textcolor),
+              ),
             ),
           ],
         );
@@ -107,7 +152,7 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: AppTheme.textcolor,
         title: Text(
           'Tasbeeh Counter',
           style: TextStyle(color: Colors.white),
@@ -128,7 +173,7 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/lb.png'),
+            image: AssetImage(BackgroundImage.imagepath),
             fit: BoxFit.cover,
           ),
         ),
@@ -154,7 +199,7 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
                   _showUndoTasbihDialog(deletedItem, index);
                 },
                 child: Card(
-                  color: Colors.grey[700],
+                  color: AppTheme.textcolor,
                   margin: EdgeInsets.only(bottom: 30),
                   child: ListTile(
                     title: Text(
@@ -172,9 +217,15 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddTasbihDialog,
-        child: Icon(Icons.add),
+      floatingActionButton: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+        ),
+        child: FloatingActionButton(
+          onPressed: _showAddTasbihDialog,
+          child: Icon(Icons.add),
+          backgroundColor: AppTheme.textcolor,
+        ),
       ),
     );
   }
