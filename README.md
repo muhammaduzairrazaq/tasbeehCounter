@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 
-<div align="center">
+<div align="left">
   <br/>
 
   **Other Flutter Apps**
@@ -73,13 +73,14 @@ In this project I have created a customizable Tasbeeh Counter App.
 - The Live Demo link will be available soon!
 
 ## 🖼️ Running App Pictures <a name="pictures"></a>
-- ![image](https://github.com/muhammaduzairrazaq/tasbeehCounter/assets/138608690/10680076-ae28-4bdc-81b4-17ede3fe6544)
-- ![image](https://github.com/muhammaduzairrazaq/tasbeehCounter/assets/138608690/c478243a-c301-4068-838a-2808a8b16cec)
-- ![image](https://github.com/muhammaduzairrazaq/tasbeehCounter/assets/138608690/6035ca85-0d75-422d-be89-931d2605059c)
-- ![image](https://github.com/muhammaduzairrazaq/tasbeehCounter/assets/138608690/9f27e8fe-93dc-42ee-9536-637d807315e1)
-- ![image](https://github.com/muhammaduzairrazaq/tasbeehCounter/assets/138608690/dc735ed8-c565-46f3-a3a1-53bb35f4cfef)
-- ![image](https://github.com/muhammaduzairrazaq/tasbeehCounter/assets/138608690/d4dfffe7-dcff-4f37-ab6d-865756ec2e88)
-  
+
+- ![image](https://github.com/muhammaduzairrazaq/tasbeehCounter/assets/138608690/855e6833-42b4-4d8f-9ae0-4c57934a68f5)
+- ![image](https://github.com/muhammaduzairrazaq/tasbeehCounter/assets/138608690/ac4e999d-940b-46ee-ac2f-c6359d96cbd5)
+- ![image](https://github.com/muhammaduzairrazaq/tasbeehCounter/assets/138608690/ff7deaa9-a365-4535-b7ae-8639dfef962f)
+- ![image](https://github.com/muhammaduzairrazaq/tasbeehCounter/assets/138608690/e0334846-4e54-441b-83d4-b5d9f34e7d83)
+- ![image](https://github.com/muhammaduzairrazaq/tasbeehCounter/assets/138608690/24ac7799-4932-48bc-a7f1-5c2ca173d831)
+- ![image](https://github.com/muhammaduzairrazaq/tasbeehCounter/assets/138608690/ba0ab2fd-a88d-447f-af86-7c6cf075f722)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 💻 Getting Started <a name="getting-started"></a>
