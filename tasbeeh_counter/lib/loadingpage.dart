@@ -26,7 +26,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/lodingbk.gif',
+              'assets/loadingpage.gif',
               fit: BoxFit.cover,
               width: 200,
               height: 200,

@@ -1,4 +1,6 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:vibration/vibration.dart';
 import 'settingscreen.dart';
 import 'app_theme.dart';
 
@@ -45,6 +47,19 @@ class _TasbeehCounterState extends State<TasbeehCounter> {
       setCompleted = 0;
       currentCount = 0;
     });
+  }
+
+  void playSound() {
+    if(AppTheme.sound==true){
+    final player = AudioPlayer();
+    player.play(AssetSource('ticksound.mp3'));
+    }
+  }
+
+  void playVibrate(){
+    if(AppTheme.vibrate==true){
+    Vibration.vibrate();
+    }
   }
 
   @override
@@ -117,7 +132,7 @@ class _TasbeehCounterState extends State<TasbeehCounter> {
             ),
           ),
           Container(
-            color: const Color.fromARGB(255, 80, 79, 79).withOpacity(0.8),
+            color: const Color.fromARGB(255, 80, 79, 79).withOpacity(AppTheme.opacity),
           ),
           Center(
             child: Column(
@@ -136,6 +151,8 @@ class _TasbeehCounterState extends State<TasbeehCounter> {
                   onTap: () {
                     incrementProgress();
                     incrementsetProgress();
+                    playSound();
+                    playVibrate();
                   },
                   child: Stack(
                     alignment: Alignment.center,
@@ -144,7 +161,7 @@ class _TasbeehCounterState extends State<TasbeehCounter> {
                         height: 200,
                         width: 200,
                         child: CircularProgressIndicator(
-                          value: progress / 100,
+                          value: progress / totalSet,
                           valueColor:
                               AlwaysStoppedAnimation<Color>(AppTheme.textcolor),
                           strokeWidth: 10,

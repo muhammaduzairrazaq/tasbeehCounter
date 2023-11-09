@@ -17,9 +17,9 @@ class _SettingsState extends State<Settings> {
     Colors.blue,
     Colors.orange,
     Colors.green,
-    Colors.black,
+    const Color.fromARGB(255, 37, 37, 37),
     Colors.pink,
-    Colors.tealAccent,
+    Colors.deepOrange,
   ];
 
   void updateThemeColor(Color color) async {
@@ -29,9 +29,11 @@ class _SettingsState extends State<Settings> {
   }
 
   List<String> imagePaths = [
-    'assets/tbk1.png',
-    'assets/tbk2.png',
-    'assets/tbk3.png',
+    'assets/nnldb.png',
+    'assets/n1.png',
+    'assets/mosn.png',
+    'assets/mosn2.png',
+    'assets/mosn3.png',
   ];
 
   void nextImage() {
@@ -88,7 +90,7 @@ class _SettingsState extends State<Settings> {
               height: double.infinity,
             ),
             Container(
-              color: const Color.fromARGB(255, 87, 87, 87).withOpacity(0.8),
+              color: const Color.fromARGB(255, 87, 87, 87).withOpacity(AppTheme.opacity),
               width: double.infinity,
               height: double.infinity,
             ),
@@ -100,6 +102,7 @@ class _SettingsState extends State<Settings> {
                         bottom: BorderSide(color: Colors.grey, width: 2.0)),
                   ),
                   child: SwitchListTile(
+                    activeColor: AppTheme.textcolor,
                     title: Text(
                       'Vibration',
                       style: TextStyle(color: AppTheme.textcolor, fontSize: 18),
@@ -108,6 +111,7 @@ class _SettingsState extends State<Settings> {
                     onChanged: (bool value) {
                       setState(() {
                         _vibration = value;
+                        AppTheme.vibrate = value;
                       });
                     },
                   ),
@@ -118,6 +122,7 @@ class _SettingsState extends State<Settings> {
                         bottom: BorderSide(color: Colors.grey, width: 2.0)),
                   ),
                   child: SwitchListTile(
+                    activeColor: AppTheme.textcolor,
                     title: Text(
                       'Sound',
                       style: TextStyle(color: AppTheme.textcolor, fontSize: 18),
@@ -126,6 +131,7 @@ class _SettingsState extends State<Settings> {
                     onChanged: (bool value) {
                       setState(() {
                         _sound = value;
+                        AppTheme.sound = value;
                       });
                     },
                   ),
@@ -200,6 +206,7 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   child: SwitchListTile(
+                    activeColor: AppTheme.textcolor,
                     title: Text(
                       'Vignette',
                       style: TextStyle(color: AppTheme.textcolor, fontSize: 18),
@@ -208,6 +215,12 @@ class _SettingsState extends State<Settings> {
                     onChanged: (bool value) {
                       setState(() {
                         _vignette = value;
+                        if (_vignette==false) {
+                          AppTheme.updateOpacity(0.8);
+                        }
+                        else {
+                          AppTheme.updateOpacity(0.6);
+                        }
                       });
                     },
                   ),
@@ -223,7 +236,11 @@ class _SettingsState extends State<Settings> {
                           _vibration = false;
                           _sound = false;
                           _vignette = false;
-                          AppTheme.textcolor = Colors.green;
+                          AppTheme.textcolor = const Color.fromARGB(255, 37, 37, 37);
+                          _currentImageIndex = 0;
+                          AppTheme.updateOpacity(0.8);
+                          AppTheme.sound=false;
+                          AppTheme.vibrate=false;
                         });
                       },
                       style: ButtonStyle(
