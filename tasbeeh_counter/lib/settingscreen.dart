@@ -238,6 +238,7 @@ class _SettingsState extends State<Settings> {
                           AppTheme.updateOpacity(0.8);
                           AppTheme.sound = false;
                           AppTheme.vibrate = false;
+                          BackgroundImage.updateBackgroundImage('assets/nnldb.png');
                         });
                       },
                       style: ButtonStyle(
