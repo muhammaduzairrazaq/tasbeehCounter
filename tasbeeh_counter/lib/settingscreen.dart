@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tasbeeh_counter/tasbeeh_counter_screen.dart';
 import 'app_theme.dart';
+
+TasbeehCounterState tcs = TasbeehCounterState();
 
 class Settings extends StatefulWidget {
   @override
@@ -7,9 +10,6 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  bool _vibration = false;
-  bool _sound = false;
-  bool _vignette = false;
   int _currentImageIndex = 0;
 
   List<Color> themeColors = [
@@ -22,7 +22,7 @@ class _SettingsState extends State<Settings> {
     Colors.deepOrange,
   ];
 
-  void updateThemeColor(Color color) async {
+  void updateThemeColor(Color color) {
     setState(() {
       AppTheme.updateThemeColor(color);
     });
@@ -84,13 +84,14 @@ class _SettingsState extends State<Settings> {
         body: Stack(
           children: [
             Image.asset(
-              imagePaths[_currentImageIndex],
+              BackgroundImage.imagepath,
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
             ),
             Container(
-              color: const Color.fromARGB(255, 87, 87, 87).withOpacity(AppTheme.opacity),
+              color: const Color.fromARGB(255, 87, 87, 87)
+                  .withOpacity(AppTheme.opacity),
               width: double.infinity,
               height: double.infinity,
             ),
@@ -107,10 +108,9 @@ class _SettingsState extends State<Settings> {
                       'Vibration',
                       style: TextStyle(color: AppTheme.textcolor, fontSize: 18),
                     ),
-                    value: _vibration,
+                    value: AppTheme.vibrate,
                     onChanged: (bool value) {
                       setState(() {
-                        _vibration = value;
                         AppTheme.vibrate = value;
                       });
                     },
@@ -127,10 +127,9 @@ class _SettingsState extends State<Settings> {
                       'Sound',
                       style: TextStyle(color: AppTheme.textcolor, fontSize: 18),
                     ),
-                    value: _sound,
+                    value: AppTheme.sound,
                     onChanged: (bool value) {
                       setState(() {
-                        _sound = value;
                         AppTheme.sound = value;
                       });
                     },
@@ -211,14 +210,13 @@ class _SettingsState extends State<Settings> {
                       'Vignette',
                       style: TextStyle(color: AppTheme.textcolor, fontSize: 18),
                     ),
-                    value: _vignette,
+                    value: AppTheme.vigneette,
                     onChanged: (bool value) {
                       setState(() {
-                        _vignette = value;
-                        if (_vignette==false) {
+                        AppTheme.vigneette = value;
+                        if (AppTheme.vigneette == false) {
                           AppTheme.updateOpacity(0.8);
-                        }
-                        else {
+                        } else {
                           AppTheme.updateOpacity(0.6);
                         }
                       });
@@ -233,14 +231,13 @@ class _SettingsState extends State<Settings> {
                     child: TextButton(
                       onPressed: () {
                         setState(() {
-                          _vibration = false;
-                          _sound = false;
-                          _vignette = false;
-                          AppTheme.textcolor = const Color.fromARGB(255, 37, 37, 37);
+                          AppTheme.vigneette = false;
+                          AppTheme.textcolor =
+                              const Color.fromARGB(255, 37, 37, 37);
                           _currentImageIndex = 0;
                           AppTheme.updateOpacity(0.8);
-                          AppTheme.sound=false;
-                          AppTheme.vibrate=false;
+                          AppTheme.sound = false;
+                          AppTheme.vibrate = false;
                         });
                       },
                       style: ButtonStyle(

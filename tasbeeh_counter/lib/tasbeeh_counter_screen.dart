@@ -5,14 +5,15 @@ import 'settingscreen.dart';
 import 'app_theme.dart';
 
 class TasbeehCounter extends StatefulWidget {
+  
   @override
-  _TasbeehCounterState createState() => _TasbeehCounterState();
+  TasbeehCounterState createState() => TasbeehCounterState();
   final Map<String, dynamic> item;
   final int index;
   TasbeehCounter({required this.item, required this.index});
 }
 
-class _TasbeehCounterState extends State<TasbeehCounter> {
+class TasbeehCounterState extends State<TasbeehCounter> {
   String tasbeehName = 'Tasbeeh Name';
   int setCompleted = 0;
   int totalCount = 0;
@@ -91,6 +92,7 @@ class _TasbeehCounterState extends State<TasbeehCounter> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
+             
             Navigator.of(context).pop({
               'item': widget.item,
               'updatedItem': {
@@ -101,10 +103,11 @@ class _TasbeehCounterState extends State<TasbeehCounter> {
                 'set_completed': setCompleted,
               },
             });
+           
           },
         ),
         title: Text('Tasbeeh Counter', style: TextStyle(color: Colors.white)),
-        actions: <Widget>[
+        actions: [
           IconButton(
             icon: Icon(Icons.restart_alt, color: Colors.white),
             onPressed: restartProgress,

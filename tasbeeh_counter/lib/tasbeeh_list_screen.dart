@@ -45,35 +45,35 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
       'total_count': 0,
       'set_completed': 0,
     },
-     {
+    {
       'tasbih_name': 'AstaghfirAllah',
       'total_set': 33,
       'current_count': 0,
       'total_count': 0,
       'set_completed': 0,
     },
-     {
+    {
       'tasbih_name': 'La illaha illallah',
       'total_set': 33,
       'current_count': 0,
       'total_count': 0,
       'set_completed': 0,
     },
-     {
+    {
       'tasbih_name': 'AstaghfirAllah',
       'total_set': 33,
       'current_count': 0,
       'total_count': 0,
       'set_completed': 0,
     },
-     {
+    {
       'tasbih_name': 'Allahumma',
       'total_set': 33,
       'current_count': 0,
       'total_count': 0,
       'set_completed': 0,
     },
-     {
+    {
       'tasbih_name': 'Ayate Karima',
       'total_set': 33,
       'current_count': 0,
@@ -114,7 +114,7 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
               ),
             ],
           ),
-          actions: <Widget>[
+          actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
@@ -157,7 +157,7 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
           'Tasbeeh Counter',
           style: TextStyle(color: Colors.white),
         ),
-        actions: <Widget>[
+        actions: [
           IconButton(
             icon: Icon(Icons.settings),
             onPressed: () {
@@ -232,9 +232,11 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
 
   void _showUndoTasbihDialog(Map<String, dynamic> deletedItem, int index) {
     final snackBar = SnackBar(
+      backgroundColor: AppTheme.textcolor,
       content: Text('Tasbeeh Deleted!'),
       action: SnackBarAction(
         label: 'Undo',
+        textColor: Colors.white,
         onPressed: () {
           setState(() {
             tasbeehItems.insert(index, deletedItem);
@@ -249,7 +251,10 @@ class _TasbeehScreenState extends State<TasbeehScreen> {
       Map<String, dynamic> tasbeehItem, int index) async {
     final updatedData = await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => TasbeehCounter(item: tasbeehItem, index: index),
+        builder: (context) => TasbeehCounter(
+          item: tasbeehItem,
+          index: index,
+        ),
       ),
     );
 

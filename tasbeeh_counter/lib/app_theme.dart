@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static Color textcolor =   const Color.fromARGB(255, 37, 37, 37);
   static double opacity  = 0.8;
+  static bool vigneette = false;
   static bool sound = false;
   static bool vibrate = false;
 
@@ -18,11 +19,13 @@ class AppTheme {
   static void updateVibrate(bool value) {
     vibrate = value;
   }
+  static void updateVigneette(bool value) {
+    vigneette = value;
+  }
 }
 
 class BackgroundImage {
   static String imagepath = 'assets/nnldb.png';
-
   static void updateBackgroundImage(String path) {
     imagepath = path;
   }
